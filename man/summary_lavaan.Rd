@@ -7,9 +7,9 @@
 summary_lavaan(object, ...)
 }
 \arguments{
-\item{object}{A model of class `lavaan`.}
+\item{object}{A model of class class \code{\link{lavaan-class}}.}
 
-\item{...}{all arguments from `lavaan::summary`. The argument information
+\item{...}{all arguments from `lavaan::summary`. All argument information
 is available at ?`lavaan-class` in the `summary` section.}
 }
 \value{

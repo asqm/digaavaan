@@ -1,6 +1,6 @@
 #' Dig through lavaan objects and extract information as data frames.
 #'
-#' `lavaan` related objects contain a lot of information, specially in
+#' \code{\link{lavaan-class}} related objects contain a lot of information, specially in
 #' group-wise models and models containing a lot of customization. Users
 #' usually use `lavaan::summary`` to print information form the model but then
 #' find themselves rambling through the inners of the model to actually
@@ -9,8 +9,8 @@
 #' of `lavaan::summary` but instead of printing, it returns the same
 #' information as a list with the information as data frames.
 #'
-#' @param object A model of class `lavaan`.
-#' @param ... all arguments from `lavaan::summary`. The argument information
+#' @param object A model of class class \code{\link{lavaan-class}}.
+#' @param ... all arguments from `lavaan::summary`. All argument information
 #' is available at ?`lavaan-class` in the `summary` section.
 #'
 #' @return a list containing data frames with relevant information.
