@@ -1180,3 +1180,44 @@ lavaan_merge <- function (pt1 = NULL, pt2 = NULL, remove.duplicated = FALSE,
   NEW <- base::merge(pt1, pt2, all = TRUE, sort = FALSE)
   NEW
 }
+
+
+### Utils for group_qqscore
+
+# Just vectorize the previous so that it runs through all
+# possible latent variables
+vec_subsetting_lat <- function(x, y) {
+  as.data.frame(lapply(x, subsetting_latent, group_data = y))
+}
+
+# If a single latent variable df is supplied
+# with standardized coefficients and the
+# country data with original variables, it returns the quality
+# of sumscore of both latent variables
+subsetting_latent <- function(latent_df, group_data) {
+  lambda <- latent_df$std.all
+  
+  var_data <-
+    vapply(latent_df$rhs,
+           function(x) stats::var(group_data[x]), FUN.VALUE = numeric(1))
+  
+  variance_cs <- stats::var(rowSums(group_data[latent_df$rhs]))
+  
+  q_sscore(lambda, var_data, variance_cs)
+}
+
+# Extracts the standardized coefficients
+# from each group
+country_latent <- function(df) {
+  cnt_stdest <- df[df$op == "=~", c("lhs", "rhs", "std.all")]
+  cnt_sep_latent <- split(cnt_stdest, cnt_stdest$lhs)
+  cnt_sep_latent
+}
+
+# Turns a matrix given by lavaan to a
+# dataframe w/ column names
+todf <- function(dat, some_names) {
+  dt <- as.data.frame(dat)
+  names(dt) <- some_names
+  dt
+}

@@ -16,7 +16,7 @@ is available at ?`lavaan-class` in the `summary` section.}
 a list containing data frames with relevant information.
 }
 \description{
-`lavaan` related objects contain a lot of information, specially in
+\code{\link{lavaan-class}} related objects contain a lot of information, specially in
 group-wise models and models containing a lot of customization. Users
 usually use `lavaan::summary`` to print information form the model but then
 find themselves rambling through the inners of the model to actually

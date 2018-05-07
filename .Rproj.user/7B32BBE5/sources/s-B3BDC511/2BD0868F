@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1525711733009.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "2BD0868F",
+    "lastKnownWriteTime" : 1525712091,
+    "last_content_update" : 1525712091866,
+    "path" : "~/all_repos/digavaan/R/group_qsscore.R",
+    "project_path" : "R/group_qsscore.R",
+    "properties" : {
+        "cursorPosition" : "33,39",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
