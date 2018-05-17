@@ -1,10 +1,11 @@
 #' Calculate quality of latent variable sum scores by groups
 #'
 #' @param model A lavaan model
+#' @param groups A character vector specifying which groups to filter in the final model
 #'
 #' @return A data frame
 #' @export
-group_qsscore <- function(model) {
+group_qsscore <- function(model, groups) {
   # Grab original data and name columns
   # I don't calculate the variance yet because
   # I need to know why variables were composing the
@@ -22,6 +23,11 @@ group_qsscore <- function(model) {
   
   cnt_quality <- Map(vec_subsetting_lat, latent_sep, cnt_dt)
   final_df <- cbind(groups = names(cnt_quality), Reduce(rbind, cnt_quality))
+  
+  if (!missing(countries)) {
+    final_df <- final_df[final_df$groups %in% groups, ]
+  }
+  
   final_df
 }
 
@@ -36,3 +42,5 @@ group_qsscore <- function(model) {
 q_sscore <- function(lambda, var_data, variance_cs) {
   1 - (sum((1 - (lambda^2)) * var_data) * (1 / variance_cs))
 }
+
+
