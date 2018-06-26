@@ -24,7 +24,7 @@ group_qsscore <- function(model, groups) {
   cnt_quality <- Map(vec_subsetting_lat, latent_sep, cnt_dt)
   final_df <- cbind(groups = names(cnt_quality), Reduce(rbind, cnt_quality))
   
-  if (!missing(countries)) {
+  if (!missing(groups)) {
     final_df <- final_df[final_df$groups %in% groups, ]
   }
   
