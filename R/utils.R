@@ -964,9 +964,9 @@ parameter_estimates <-
       LIST$ci.upper <- ci[, 2]
     }
     if (standardized) {
-      LIST$std.lv <- lavaan:::standardize.est.lv(object)
-      LIST$std.all <- lavaan:::standardize.est.all(object, est.std = LIST$est.std)
-      LIST$std.nox <- lavaan:::standardize.est.all.nox(object, est.std = LIST$est.std)
+      LIST$std.lv <- lavaan:::lav_standardize_lv(object)
+      LIST$std.all <- lavaan:::lav_standardize_all(object, est.std = LIST$est.std)
+      LIST$std.nox <- lavaan:::lav_standardize_all_nox(object, est.std = LIST$est.std)
     }
     if (rsquare) {
       r2 <- lavaan:::lavTech(object, "rsquare", add.labels = TRUE)

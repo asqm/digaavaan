@@ -28,7 +28,7 @@ Using the same example from `lavaan`:
 
 ``` r
 library(lavaan)
-#> This is lavaan 0.5-23.1097
+#> This is lavaan 0.6-2
 #> lavaan is BETA software! Please report any bugs.
 library(digavaan)
 
@@ -51,18 +51,22 @@ fit <- sem(model, data=PoliticalDemocracy)
 
 # Traditional print
 summary(fit)
-#> lavaan (0.5-23.1097) converged normally after  68 iterations
+#> lavaan 0.6-2 ended normally after 68 iterations
+#> 
+#>   Optimization method                           NLMINB
+#>   Number of free parameters                         31
 #> 
 #>   Number of observations                            75
 #> 
 #>   Estimator                                         ML
-#>   Minimum Function Test Statistic               38.125
+#>   Model Fit Test Statistic                      38.125
 #>   Degrees of freedom                                35
 #>   P-value (Chi-square)                           0.329
 #> 
 #> Parameter Estimates:
 #> 
 #>   Information                                 Expected
+#>   Information saturated (h1) model          Structured
 #>   Standard Errors                             Standard
 #> 
 #> Latent Variables:
@@ -125,7 +129,7 @@ summary(fit)
 summary_lavaan(fit)
 #> $header
 #> $header$iter
-#> [1] "lavaan (0.5-23.1097) converged normally after  68 iterations\n"
+#> [1] "lavaan (0.6-2) converged normally after  68 iterations\n"
 #> 
 #> $header$n_groups
 #>   name_group used total

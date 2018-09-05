@@ -1,3 +1,4 @@
 digavaan.Rproj
 *.csv
 *.R
+.Rproj.user

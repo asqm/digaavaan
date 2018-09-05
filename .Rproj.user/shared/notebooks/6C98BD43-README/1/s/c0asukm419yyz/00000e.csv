@@ -1,6 +1,15 @@
-"0","library(lavaan)
+"0","# Same information but as a data frames
+summary_lavaan(fit, standardize = TRUE)
 "
-"2","This is lavaan 0.5-23.1097
+"1","$header
 "
-"2","lavaan is BETA software! Please report any bugs.
+"1","$header$iter
+"
+"1","[1]"
+"1"," ""lavaan (0.6-2) converged normally after  68 iterations\n"""
+"1","
+"
+"1","
+"
+"1","$header$n_groups
 "

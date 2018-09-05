@@ -1,3 +1,8 @@
+"0","library(lavaan)"
+"2","This is lavaan 0.6-2
+"
+"2","lavaan is BETA software! Please report any bugs.
+"
 "0","knitr::opts_chunk$set("
 "0","  collapse = TRUE,"
 "0","  comment = ""#>"","
