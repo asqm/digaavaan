@@ -4,10 +4,12 @@
 \alias{group_qsscore}
 \title{Calculate quality of latent variable sum scores by groups}
 \usage{
-group_qsscore(model)
+group_qsscore(model, groups)
 }
 \arguments{
 \item{model}{A lavaan model}
+
+\item{groups}{A character vector specifying which groups to filter in the final model}
 }
 \value{
 A data frame

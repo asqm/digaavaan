@@ -251,7 +251,7 @@ short_summary_df <- function(object) {
   }
   if (object@Options$estimator == "MML") {
     short_sum$fit_measures <-
-      lavaan:::fitMeasures(object, c("logl", "npar", "aic", "bic",  "bic2"))
+      lavaan::fitMeasures(object, c("logl", "npar", "aic", "bic",  "bic2"))
   }
   short_sum
 }
@@ -378,14 +378,14 @@ fit_measures_details <- function(x) {
     # to the existing fit_measure df because some of the if statements below
     # need to be appended, that is, some might be true and appended while
     # other might be not!
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$usermodel_vs_baselinemodel) {
+    baseline_fun_1 <- function(x, f, s, t, the_df = fit_measure$usermodel_vs_baselinemodel) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
     #    cat("\nUser model versus baseline model:\n\n")
     if ("cfi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Comparative Fit Index (CFI)",
                      "cfi",
                      "cfi.scaled")
@@ -393,63 +393,63 @@ fit_measures_details <- function(x) {
     
     if ("tli" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Tucker-Lewis Index (TLI)",
                      "tli",
                      "tli.scaled")
     }
     if ("cfi.robust" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Robust Comparative Fit Index (CFI)",
                      "",
                      "cfi.robust")
     }
     if ("tli.robust" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Robust Tucker-Lewis Index (TLI)",
                      "",
                      "tli.robust")
     }
     if ("nnfi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Bentler-Bonett Non-normed Fit Index (NNFI)",
                      "nnfi",
                      "nnfi.robust")
     }
     if ("nfi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Bentler-Bonett Normed Fit Index (NFI)",
                      "nfi",
                      "nfi.scaled")
     }
     if ("nfi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Parsimony Normed Fit Index (PNFI)",
                      "pnfi",
                      "pnfi.scaled")
     }
     if ("rfi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Bollen's Relative Fit Index (RFI)",
                      "rfi",
                      "rfi.scaled")
     }
     if ("ifi" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Bollen's Incremental Fit Index (IFI)",
                      "ifi",
                      "ifi.scaled")
     }
     if ("rni" %in% names.x) {
       fit_measure$usermodel_vs_baselinemodel <-
-        baseline_fun(x,
+        baseline_fun_1(x,
                      "Relative Noncentrality Index (RNI)",
                      "rni",
                      "rni.robust")
@@ -463,21 +463,21 @@ fit_measures_details <- function(x) {
                  value_scaled = numeric())
     
     
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$loglike_informationcriteria) {
+    baseline_fun_2 <- function(x, f, s, t, the_df = fit_measure$loglike_informationcriteria) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
     #    cat("\nLoglikelihood and Information Criteria:\n\n")
     
     fit_measure$loglike_informationcriteria <-
-      baseline_fun(x,
+      baseline_fun_2(x,
                    "Loglikelihood user model (H0)",
                    "logl",
                    "logl")
     
     if (!is.na(x["scaling.factor.h0"])) {
       fit_measure$loglike_informationcriteria <-
-        baseline_fun(x,
+        baseline_fun_2(x,
                      "Scaling correction factor",
                      "",
                      "scaling.factor.h0")
@@ -485,7 +485,7 @@ fit_measures_details <- function(x) {
     if ("unrestricted.logl" %in% names.x) {
       
       fit_measure$loglike_informationcriteria <-
-        baseline_fun(x,
+        baseline_fun_2(x,
                      "Loglikelihood unrestricted model (H1)",
                      "unrestricted.logl",
                      "unrestricted.logl")
@@ -493,7 +493,7 @@ fit_measures_details <- function(x) {
       if (!is.na(x["scaling.factor.h1"])) {
         
         fit_measure$loglike_informationcriteria <-
-          baseline_fun(x,
+          baseline_fun_2(x,
                        "Scaling correction factor for the MLR correction",
                        "",
                        "scaling.factor.h1")
@@ -502,19 +502,19 @@ fit_measures_details <- function(x) {
     
     
     fit_measure$loglike_informationcriteria <-
-      baseline_fun(x,
+      baseline_fun_2(x,
                    "Number of free parameters",
                    "npar",
                    "npar")
     
     fit_measure$loglike_informationcriteria <-
-      baseline_fun(x,
+      baseline_fun_2(x,
                    "Akaike (AIC)",
                    "aic",
                    "aic")
     
     fit_measure$loglike_informationcriteria <-
-      baseline_fun(x,
+      baseline_fun_2(x,
                    "Bayesian (BIC)",
                    "bic",
                    "bic")
@@ -522,7 +522,7 @@ fit_measures_details <- function(x) {
     if (!is.na(x["bic2"])) {
       
       fit_measure$loglike_informationcriteria <-
-        baseline_fun(x,
+        baseline_fun_2(x,
                      "Sample-size adjusted Bayesian (BIC)",
                      "bic2",
                      "bic2")
@@ -537,14 +537,14 @@ fit_measures_details <- function(x) {
                  value_scaled = numeric())
     
     
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$rootmse_approx) {
+    baseline_fun_3 <- function(x, f, s, t, the_df = fit_measure$rootmse_approx) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
     #    cat("\nRoot Mean Square Error of Approximation:\n\n")
     
     fit_measure$rootmse_approx <-
-      baseline_fun(x,
+      baseline_fun_3(x,
                    "RMSEA",
                    "rmsea",
                    "rmsea.scaled")
@@ -552,13 +552,13 @@ fit_measures_details <- function(x) {
     if ("rmsea.ci.lower" %in% names.x) {
       
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "90 Percent Confidence Interval on RMSEA (lower)",
                      "rmsea.ci.lower",
                      "rmsea.ci.lower.scaled")
       
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "90 Percent Confidence Interval on RMSEA (upper)",
                      "rmsea.ci.upper",
                      "rmsea.ci.upper.scaled")
@@ -566,7 +566,7 @@ fit_measures_details <- function(x) {
     if ("rmsea.pvalue" %in% names.x) {
       
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "P-value RMSEA <= 0.05",
                      "rmsea.pvalue",
                      "rmsea.pvalue.scaled")
@@ -574,7 +574,7 @@ fit_measures_details <- function(x) {
     if ("rmsea.robust" %in% names.x) {
       
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "Robust RMSEA",
                      "",
                      "rmsea.robust")
@@ -583,12 +583,12 @@ fit_measures_details <- function(x) {
       
       
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "90 Percent Confidence Interval on RMSEA (Lower ROBUST)",
                      "",
                      "rmsea.ci.lower.robust")
       fit_measure$rootmse_approx <-
-        baseline_fun(x,
+        baseline_fun_3(x,
                      "90 Percent Confidence Interval on RMSEA (Upper ROBUST)",
                      "",
                      "rmsea.ci.upper.robust")
@@ -603,7 +603,7 @@ fit_measures_details <- function(x) {
                  value_scaled = numeric())
     
     
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$standardize_rmsqresidual) {
+    baseline_fun_4 <- function(x, f, s, t, the_df = fit_measure$standardize_rmsqresidual) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
@@ -612,7 +612,7 @@ fit_measures_details <- function(x) {
     if ("rmr" %in% names.x) {
       
       fit_measure$standardize_rmsqresidual <-
-        baseline_fun(x,
+        baseline_fun_4(x,
                      "RMR",
                      "rmr",
                      "rmr")
@@ -620,7 +620,7 @@ fit_measures_details <- function(x) {
     if ("rmr_nomean" %in% names.x) {
       
       fit_measure$standardize_rmsqresidual <-
-        baseline_fun(x,
+        baseline_fun_4(x,
                      "RMR (No Mean)",
                      "rmr_nomean",
                      "rmr_nomean")
@@ -628,7 +628,7 @@ fit_measures_details <- function(x) {
     if ("srmr" %in% names.x) {
       
       fit_measure$standardize_rmsqresidual <-
-        baseline_fun(x,
+        baseline_fun_4(x,
                      "SRMR",
                      "srmr",
                      "srmr")
@@ -636,7 +636,7 @@ fit_measures_details <- function(x) {
     if ("srmr_nomean" %in% names.x) {
       
       fit_measure$standardize_rmsqresidual <-
-        baseline_fun(x,
+        baseline_fun_4(x,
                      "SRMR (No Mean)",
                      "srmr_nomean",
                      "srmr_nomean")
@@ -650,7 +650,7 @@ fit_measures_details <- function(x) {
                  value_scaled = numeric())
     
     
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$weighted_rmsqresidual) {
+    baseline_fun_5 <- function(x, f, s, t, the_df = fit_measure$weighted_rmsqresidual) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
@@ -658,7 +658,7 @@ fit_measures_details <- function(x) {
     if ("wrmr" %in% names.x) {
       
       fit_measure$weighted_rmsqresidual <-
-        baseline_fun(x,
+        baseline_fun_5(x,
                      "WRMR",
                      "wrmr",
                      "wrmr")
@@ -673,7 +673,7 @@ fit_measures_details <- function(x) {
                  value_scaled = numeric())
     
     
-    baseline_fun <- function(x, f, s, t, the_df = fit_measure$other_fit_indices) {
+    baseline_fun_6 <- function(x, f, s, t, the_df = fit_measure$other_fit_indices) {
       rbind(the_df, looper(f, x[s], x[t]))
     }
     
@@ -681,14 +681,14 @@ fit_measures_details <- function(x) {
     #    cat("\nOther Fit Indices:\n\n")
     if ("cn_05" %in% names.x) {
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Hoelter Critical N (CN) alpha=0.05",
                      "cn_05",
                      "cn_05")
     }
     if ("cn_01" %in% names.x) {
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Hoelter Critical N (CN) alpha=0.01",
                      "cn_01",
                      "cn_01")
@@ -697,7 +697,7 @@ fit_measures_details <- function(x) {
     if ("gfi" %in% names.x) {
       
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Goodness of Fit Index (GFI)",
                      "gfi",
                      "gfi")
@@ -706,7 +706,7 @@ fit_measures_details <- function(x) {
     if ("agfi" %in% names.x) {
       
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Adjusted Goodness of Fit Index (AGFI)",
                      "agfi",
                      "agfi")
@@ -714,7 +714,7 @@ fit_measures_details <- function(x) {
     if ("pgfi" %in% names.x) {
       
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Parsimony Goodness of Fit Index (PGFI)",
                      "pgfi",
                      "pgfi")
@@ -722,7 +722,7 @@ fit_measures_details <- function(x) {
     if ("mfi" %in% names.x) {
       
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "McDonald Fit Index (MFI)",
                      "mfi",
                      "mfi")
@@ -730,7 +730,7 @@ fit_measures_details <- function(x) {
     if ("ecvi" %in% names.x) {
       
       fit_measure$other_fit_indices <-
-        baseline_fun(x,
+        baseline_fun_6(x,
                      "Expected Cross-Validation Index (ECVI)",
                      "ecvi",
                      "ecvi")
@@ -817,7 +817,7 @@ parameter_estimates <-
     } else if (!is.null(PARTABLE$est)) {
       LIST$est <- PARTABLE$est
     } else {
-      LIST$est <- lavaan:::lav_model_get_parameters(object@Model, type = "user",
+      LIST$est <- lavaan::lav_model_get_parameters(object@Model, type = "user",
                                                     extra = TRUE)
     }
     if (se && object@Options$se != "none") {
@@ -875,7 +875,7 @@ parameter_estimates <-
         if (boot.ci.type == "norm") {
           fac <- stats::qnorm(a)
           boot.x <- colMeans(BOOT)
-          boot.est <- lavaan:::lav_model_get_parameters(object@Model,
+          boot.est <- lavaan::lav_model_get_parameters(object@Model,
                                                         GLIST = lavaan:::lav_model_x2GLIST(object@Model, boot.x),
                                                         type = "user", extra = TRUE)
           bias.est <- (boot.est - LIST$est)
@@ -969,7 +969,7 @@ parameter_estimates <-
       LIST$std.nox <- lavaan:::lav_standardize_all_nox(object, est.std = LIST$est.std)
     }
     if (rsquare) {
-      r2 <- lavaan:::lavTech(object, "rsquare", add.labels = TRUE)
+      r2 <- lavaan::lavTech(object, "rsquare", add.labels = TRUE)
       NAMES <- unlist(lapply(r2, names))
       nel <- length(NAMES)
       R2 <- data.frame(lhs = NAMES, op = rep("r2", nel), rhs = NAMES,

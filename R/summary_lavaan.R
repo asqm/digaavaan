@@ -60,7 +60,7 @@ summary_lavaan <- function(object, ...) {
       } else if (object@optim$npar > 0L && !object@optim$converged) {
         warning("lavaan WARNING: fit measures not available if model did not converge\n\n")
       } else {
-        fitted_obj <- lavaan:::fitMeasures(object, fit.measures = "default")
+        fitted_obj <- lavaan::fitMeasures(object, fit.measures = "default")
         final_list$fitted_measures <- fit_measures_details(fitted_obj)
       }
     }
@@ -76,7 +76,7 @@ summary_lavaan <- function(object, ...) {
       final_list$estimates <- PE
     }
     if (modindices) {
-      final_list$modindices <- lavaan:::modificationIndices(object, standardized = TRUE)
+      final_list$modindices <- lavaan::modificationIndices(object, standardized = TRUE)
     }
     final_list
   }
